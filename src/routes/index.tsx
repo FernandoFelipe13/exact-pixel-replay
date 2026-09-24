@@ -624,7 +624,7 @@ function Footer() {
             <li className="flex items-start gap-2.5">
               <Instagram size={16} className="mt-0.5 shrink-0 text-secondary" />
               <a
-                href="https://instagram.com/ofertadigital360"
+                href={INSTAGRAM}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-secondary"
