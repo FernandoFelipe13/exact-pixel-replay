@@ -69,13 +69,19 @@ function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a
-          href="#hero"
-          className={`font-display text-lg font-extrabold tracking-tight ${
-            solid ? "text-primary" : "text-primary-foreground"
-          }`}
-        >
-          Oferta<span className="text-secondary">Digital</span>360
+        <a href="#hero" className="flex items-center gap-2.5">
+          <img
+            src={logoAsset.url}
+            alt="Logo Oferta Digital 360"
+            className="h-11 w-11 rounded-full object-contain"
+          />
+          <span
+            className={`font-display text-lg font-extrabold tracking-tight ${
+              solid ? "text-primary" : "text-primary-foreground"
+            }`}
+          >
+            Oferta<span className="text-secondary">Digital</span>360
+          </span>
         </a>
 
         <nav aria-label="Navegação principal" className="hidden items-center gap-7 md:flex">
