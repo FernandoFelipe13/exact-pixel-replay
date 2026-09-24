@@ -24,6 +24,7 @@ import { Reveal } from "@/components/site/Reveal";
 import heroImg from "@/assets/hero.jpg";
 import fundadorImg from "@/assets/fundador.jpg";
 import ctaImg from "@/assets/cta.jpg";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 const WHATSAPP = "https://wa.me/5511993337675";
 const TITLE = "Oferta Digital 360 | Os melhores links de ofertas e análises de produtos";
@@ -69,13 +70,19 @@ function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a
-          href="#hero"
-          className={`font-display text-lg font-extrabold tracking-tight ${
-            solid ? "text-primary" : "text-primary-foreground"
-          }`}
-        >
-          Oferta<span className="text-secondary">Digital</span>360
+        <a href="#hero" className="flex items-center gap-2.5">
+          <img
+            src={logoAsset.url}
+            alt="Logo Oferta Digital 360"
+            className="h-11 w-11 rounded-full object-contain"
+          />
+          <span
+            className={`font-display text-lg font-extrabold tracking-tight ${
+              solid ? "text-primary" : "text-primary-foreground"
+            }`}
+          >
+            Oferta<span className="text-secondary">Digital</span>360
+          </span>
         </a>
 
         <nav aria-label="Navegação principal" className="hidden items-center gap-7 md:flex">
