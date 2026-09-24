@@ -8,7 +8,6 @@ import {
   Instagram,
   Link2,
   Mail,
-  MapPin,
   Menu,
   MessageCircle,
   Quote,
@@ -636,10 +635,6 @@ function Footer() {
               >
                 @ofertadigital360
               </a>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <MapPin size={16} className="mt-0.5 shrink-0 text-secondary" />
-              Estrada Benedito Cesário de Oliveira, 1469
             </li>
           </ul>
           <a
