@@ -170,8 +170,7 @@ function Hero() {
         </Reveal>
         <Reveal delay={100}>
           <h1 className="mt-7 text-4xl leading-[1.08] text-primary-foreground sm:text-5xl md:text-6xl">
-            Resultados excepcionais que superam expectativas e geram{" "}
-            <span className="text-secondary">valor real</span>
+            🎉 Seja bem-vindo à <span className="text-secondary">Oferta Digital 360</span>! 🎉
           </h1>
         </Reveal>
         <Reveal delay={200}>
