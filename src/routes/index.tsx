@@ -170,7 +170,7 @@ function Hero() {
         </Reveal>
         <Reveal delay={100}>
           <h1 className="mt-7 text-4xl leading-[1.08] text-primary-foreground sm:text-5xl md:text-6xl">
-            🎉 Seja bem-vindo à <span className="text-secondary">Oferta Digital 360</span>! 🎉
+            Seja bem-vindo à <span className="text-secondary">Oferta Digital 360</span>! 
           </h1>
         </Reveal>
         <Reveal delay={200}>
@@ -178,11 +178,11 @@ function Hero() {
             Aqui você encontra praticidade, variedade e os melhores preços da internet em um só lugar!
             Nossa missão é trazer produtos incríveis para facilitar o seu dia a dia, com ofertas especiais em tecnologia, acessórios, moda, utilidades e muito mais.
             <br /><br />
-            🛍️ Navegue pelas nossas categorias, descubra novidades e aproveite promoções imperdíveis com segurança e comodidade, sem sair de casa.
+            Navegue pelas nossas categorias, descubra novidades e aproveite promoções imperdíveis com segurança e comodidade, sem sair de casa.
             <br /><br />
-            💙 Na Oferta Digital 360, cada compra é uma nova oportunidade de economizar e receber qualidade até você.
+            Na Oferta Digital 360, cada compra é uma nova oportunidade de economizar e receber qualidade até você.
             <br /><br />
-            ✨ Aproveite nossas ofertas e faça parte da experiência 360!
+            Aproveite nossas ofertas e faça parte da experiência 360!
           </p>
         </Reveal>
         <Reveal delay={300}>
