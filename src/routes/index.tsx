@@ -27,6 +27,7 @@ import ctaImg from "@/assets/cta.jpg";
 import logoAsset from "@/assets/logo.png.asset.json";
 
 const WHATSAPP = "https://wa.me/5511993337675";
+const INSTAGRAM = "https://www.instagram.com/ofertadigital360/";
 const TITLE = "Oferta Digital 360 | Os melhores links de ofertas e análises de produtos";
 const DESCRIPTION =
   "Encontre os melhores preços da internet em produtos de diversas categorias. Análises honestas, comparações e o melhor link de oferta — com atendimento personalizado.";
@@ -554,6 +555,15 @@ function CtaFinal() {
               <MessageCircle size={18} />
               WhatsApp (11) 99333-7675
             </a>
+            <a
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-primary-foreground/40 px-7 py-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+            >
+              <Instagram size={18} />
+              @ofertadigital360
+            </a>
           </div>
         </Reveal>
       </div>
@@ -614,7 +624,7 @@ function Footer() {
             <li className="flex items-start gap-2.5">
               <Instagram size={16} className="mt-0.5 shrink-0 text-secondary" />
               <a
-                href="https://instagram.com/ofertadigital360"
+                href={INSTAGRAM}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-secondary"
