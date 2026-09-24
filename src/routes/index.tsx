@@ -24,6 +24,7 @@ import { Reveal } from "@/components/site/Reveal";
 import heroImg from "@/assets/hero.jpg";
 import fundadorImg from "@/assets/fundador.jpg";
 import ctaImg from "@/assets/cta.jpg";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 const WHATSAPP = "https://wa.me/5511993337675";
 const TITLE = "Oferta Digital 360 | Os melhores links de ofertas e análises de produtos";
