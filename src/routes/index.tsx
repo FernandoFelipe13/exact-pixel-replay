@@ -176,8 +176,14 @@ function Hero() {
         </Reveal>
         <Reveal delay={200}>
           <p className="mx-auto mt-6 max-w-2xl text-base text-primary-foreground/85 sm:text-lg">
-            Ajudamos empresas e profissionais que buscam qualidade e profissionalismo a comprar
-            melhor: análises honestas, comparação de produtos e o melhor link de oferta da internet.
+            Aqui você encontra praticidade, variedade e os melhores preços da internet em um só lugar!
+            Nossa missão é trazer produtos incríveis para facilitar o seu dia a dia, com ofertas especiais em tecnologia, acessórios, moda, utilidades e muito mais.
+            <br /><br />
+            🛍️ Navegue pelas nossas categorias, descubra novidades e aproveite promoções imperdíveis com segurança e comodidade, sem sair de casa.
+            <br /><br />
+            💙 Na Oferta Digital 360, cada compra é uma nova oportunidade de economizar e receber qualidade até você.
+            <br /><br />
+            ✨ Aproveite nossas ofertas e faça parte da experiência 360!
           </p>
         </Reveal>
         <Reveal delay={300}>
