@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import { Footer, Navbar, WhatsappFloat } from "@/components/site/Chrome";
+import { Footer, Navbar } from "@/components/site/Chrome";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -129,7 +129,6 @@ function RootComponent() {
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
         <Footer />
-        <WhatsappFloat />
       </div>
     </QueryClientProvider>
   );

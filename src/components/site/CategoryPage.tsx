@@ -1,11 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, BadgeCheck, MessageCircle } from "lucide-react";
+import { ArrowRight, BadgeCheck, Facebook } from "lucide-react";
 
 import { Reveal } from "@/components/site/Reveal";
-import { whatsappLink, type Category } from "@/lib/site";
+import { FACEBOOK, type Category } from "@/lib/site";
 
 export function CategoryPage({ category }: { category: Category }) {
-  const message = `Olá! Vi o site da Oferta Digital 360 e quero ofertas de ${category.name}.`;
 
   return (
     <div>
@@ -32,12 +31,12 @@ export function CategoryPage({ category }: { category: Category }) {
           <Reveal delay={300}>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href={whatsappLink(message)}
+                href={FACEBOOK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-secondary px-8 py-4 text-sm font-bold text-secondary-foreground shadow-lift transition-transform hover:scale-[1.03] sm:w-auto"
               >
-                Pedir ofertas de {category.name}
+                Ver ofertas de {category.name}
                 <ArrowRight size={18} />
               </a>
               <Link
@@ -81,17 +80,17 @@ export function CategoryPage({ category }: { category: Category }) {
         <Reveal className="mx-auto max-w-3xl px-5 text-center">
           <h2 className="text-3xl text-foreground sm:text-4xl">Não achou o que procurava?</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Manda sua dúvida no WhatsApp: buscamos o melhor preço de {category.name} para você,
-            sem custo nenhum.
+            Siga a página Achadinhos360 no Facebook: divulgamos o melhor preço de {category.name}{" "}
+            primeiro por lá.
           </p>
           <a
-            href={whatsappLink(message)}
+            href={FACEBOOK}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-lift transition-transform hover:scale-[1.03] hover:bg-primary/90"
           >
-            <MessageCircle size={18} />
-            Falar no WhatsApp
+            <Facebook size={18} />
+            Seguir no Facebook
           </a>
         </Reveal>
       </section>
