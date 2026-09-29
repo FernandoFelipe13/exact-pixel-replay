@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Instagram, Mail, Menu, MessageCircle, X } from "lucide-react";
+import { Facebook, Instagram, Menu, X } from "lucide-react";
 
-import { CATEGORIES, CONTACT_EMAIL, INSTAGRAM, WHATSAPP } from "@/lib/site";
+import { CATEGORIES, FACEBOOK, INSTAGRAM } from "@/lib/site";
 import logoAsset from "@/assets/logo.png.asset.json";
 
 export function Navbar() {
@@ -55,15 +55,6 @@ export function Navbar() {
               {item.emoji} {item.name}
             </Link>
           ))}
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whitespace-nowrap rounded-full bg-primary px-4 py-2 text-[13px] font-bold text-primary-foreground transition-transform hover:scale-[1.03] hover:bg-primary-dark"
-          >
-            Fale Conosco
-          </a>
-        </nav>
 
         <button
           type="button"
@@ -91,15 +82,8 @@ export function Navbar() {
               {item.emoji} {item.name}
             </Link>
           ))}
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 block rounded-full bg-primary px-5 py-3 text-center text-sm font-bold text-primary-foreground"
-          >
-            Fale Conosco
-          </a>
         </nav>
+
       )}
     </header>
   );
@@ -133,26 +117,17 @@ export function Footer() {
         </nav>
 
         <div>
-          <h3 className="text-sm font-bold text-primary-foreground">Contato</h3>
+          <h3 className="text-sm font-bold text-primary-foreground">Nos siga</h3>
           <ul className="mt-3 space-y-2.5">
             <li className="flex items-start gap-2.5">
-              <MessageCircle size={16} className="mt-0.5 shrink-0 text-secondary" />
+              <Facebook size={16} className="mt-0.5 shrink-0 text-secondary" />
               <a
-                href={WHATSAPP}
+                href={FACEBOOK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-secondary"
               >
-                (11) 99333-7675
-              </a>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <Mail size={16} className="mt-0.5 shrink-0 text-secondary" />
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="break-all transition-colors hover:text-secondary"
-              >
-                {CONTACT_EMAIL}
+                Achadinhos360
               </a>
             </li>
             <li className="flex items-start gap-2.5">
@@ -167,14 +142,7 @@ export function Footer() {
               </a>
             </li>
           </ul>
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex rounded-full bg-primary px-5 py-2.5 text-xs font-bold text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Fale Conosco
-          </a>
+
         </div>
       </div>
 
@@ -185,16 +153,3 @@ export function Footer() {
   );
 }
 
-export function WhatsappFloat() {
-  return (
-    <a
-      href={WHATSAPP}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Falar no WhatsApp com a Oferta Digital 360"
-      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-primary-foreground shadow-lift transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-whatsapp"
-    >
-      <MessageCircle size={26} />
-    </a>
-  );
-}
