@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CasaRouteImport } from './routes/casa'
+import { Route as CelularesRouteImport } from './routes/celulares'
+import { Route as CursosRouteImport } from './routes/cursos'
+import { Route as ExtrasRouteImport } from './routes/extras'
+import { Route as FitnessRouteImport } from './routes/fitness'
+import { Route as GamesRouteImport } from './routes/games'
+import { Route as InformaticaRouteImport } from './routes/informatica'
+import { Route as LivrosRouteImport } from './routes/livros'
+import { Route as PetRouteImport } from './routes/pet'
+import { Route as RoupasRouteImport } from './routes/roupas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CasaRoute = CasaRouteImport.update({
+  id: '/casa',
+  path: '/casa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CelularesRoute = CelularesRouteImport.update({
+  id: '/celulares',
+  path: '/celulares',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CursosRoute = CursosRouteImport.update({
+  id: '/cursos',
+  path: '/cursos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExtrasRoute = ExtrasRouteImport.update({
+  id: '/extras',
+  path: '/extras',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FitnessRoute = FitnessRouteImport.update({
+  id: '/fitness',
+  path: '/fitness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamesRoute = GamesRouteImport.update({
+  id: '/games',
+  path: '/games',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InformaticaRoute = InformaticaRouteImport.update({
+  id: '/informatica',
+  path: '/informatica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LivrosRoute = LivrosRouteImport.update({
+  id: '/livros',
+  path: '/livros',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PetRoute = PetRouteImport.update({
+  id: '/pet',
+  path: '/pet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoupasRoute = RoupasRouteImport.update({
+  id: '/roupas',
+  path: '/roupas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/casa': typeof CasaRoute
+  '/celulares': typeof CelularesRoute
+  '/cursos': typeof CursosRoute
+  '/extras': typeof ExtrasRoute
+  '/fitness': typeof FitnessRoute
+  '/games': typeof GamesRoute
+  '/informatica': typeof InformaticaRoute
+  '/livros': typeof LivrosRoute
+  '/pet': typeof PetRoute
+  '/roupas': typeof RoupasRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/casa': typeof CasaRoute
+  '/celulares': typeof CelularesRoute
+  '/cursos': typeof CursosRoute
+  '/extras': typeof ExtrasRoute
+  '/fitness': typeof FitnessRoute
+  '/games': typeof GamesRoute
+  '/informatica': typeof InformaticaRoute
+  '/livros': typeof LivrosRoute
+  '/pet': typeof PetRoute
+  '/roupas': typeof RoupasRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/casa': typeof CasaRoute
+  '/celulares': typeof CelularesRoute
+  '/cursos': typeof CursosRoute
+  '/extras': typeof ExtrasRoute
+  '/fitness': typeof FitnessRoute
+  '/games': typeof GamesRoute
+  '/informatica': typeof InformaticaRoute
+  '/livros': typeof LivrosRoute
+  '/pet': typeof PetRoute
+  '/roupas': typeof RoupasRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/casa'
+    | '/celulares'
+    | '/cursos'
+    | '/extras'
+    | '/fitness'
+    | '/games'
+    | '/informatica'
+    | '/livros'
+    | '/pet'
+    | '/roupas'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/casa'
+    | '/celulares'
+    | '/cursos'
+    | '/extras'
+    | '/fitness'
+    | '/games'
+    | '/informatica'
+    | '/livros'
+    | '/pet'
+    | '/roupas'
+  id:
+    | '__root__'
+    | '/'
+    | '/casa'
+    | '/celulares'
+    | '/cursos'
+    | '/extras'
+    | '/fitness'
+    | '/games'
+    | '/informatica'
+    | '/livros'
+    | '/pet'
+    | '/roupas'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CasaRoute: typeof CasaRoute
+  CelularesRoute: typeof CelularesRoute
+  CursosRoute: typeof CursosRoute
+  ExtrasRoute: typeof ExtrasRoute
+  FitnessRoute: typeof FitnessRoute
+  GamesRoute: typeof GamesRoute
+  InformaticaRoute: typeof InformaticaRoute
+  LivrosRoute: typeof LivrosRoute
+  PetRoute: typeof PetRoute
+  RoupasRoute: typeof RoupasRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/casa': {
+      id: '/casa'
+      path: '/casa'
+      fullPath: '/casa'
+      preLoaderRoute: typeof CasaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/celulares': {
+      id: '/celulares'
+      path: '/celulares'
+      fullPath: '/celulares'
+      preLoaderRoute: typeof CelularesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cursos': {
+      id: '/cursos'
+      path: '/cursos'
+      fullPath: '/cursos'
+      preLoaderRoute: typeof CursosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/extras': {
+      id: '/extras'
+      path: '/extras'
+      fullPath: '/extras'
+      preLoaderRoute: typeof ExtrasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fitness': {
+      id: '/fitness'
+      path: '/fitness'
+      fullPath: '/fitness'
+      preLoaderRoute: typeof FitnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/games': {
+      id: '/games'
+      path: '/games'
+      fullPath: '/games'
+      preLoaderRoute: typeof GamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/informatica': {
+      id: '/informatica'
+      path: '/informatica'
+      fullPath: '/informatica'
+      preLoaderRoute: typeof InformaticaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/livros': {
+      id: '/livros'
+      path: '/livros'
+      fullPath: '/livros'
+      preLoaderRoute: typeof LivrosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pet': {
+      id: '/pet'
+      path: '/pet'
+      fullPath: '/pet'
+      preLoaderRoute: typeof PetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roupas': {
+      id: '/roupas'
+      path: '/roupas'
+      fullPath: '/roupas'
+      preLoaderRoute: typeof RoupasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CasaRoute: CasaRoute,
+  CelularesRoute: CelularesRoute,
+  CursosRoute: CursosRoute,
+  ExtrasRoute: ExtrasRoute,
+  FitnessRoute: FitnessRoute,
+  GamesRoute: GamesRoute,
+  InformaticaRoute: InformaticaRoute,
+  LivrosRoute: LivrosRoute,
+  PetRoute: PetRoute,
+  RoupasRoute: RoupasRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
