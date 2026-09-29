@@ -8,3 +8,9 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture rules
+
+- Site chrome (Navbar, Footer, WhatsappFloat) lives in `src/components/site/Chrome.tsx` and renders once in `src/routes/__root.tsx` around `<Outlet />`, so category pages keep the same header/footer; page bodies must not re-add them.
+- Category data (slugs, emoji, copy, WhatsApp messages) is the single source `src/lib/site.ts`; each category has its own route file (`/casa`, `/informatica`, `/celulares`, `/games`, `/roupas`, `/fitness`, `/pet`, `/cursos`, `/livros`, `/extras`) sharing `CategoryPage`.
+
