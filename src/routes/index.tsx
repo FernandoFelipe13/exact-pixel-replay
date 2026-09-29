@@ -5,9 +5,10 @@ import {
   BadgeCheck,
   BarChart3,
   Clock,
+  Facebook,
+  Headset,
   Instagram,
   Link2,
-  MessageCircle,
   Quote,
   Scale,
   ShieldCheck,
@@ -20,7 +21,7 @@ import { Reveal } from "@/components/site/Reveal";
 import heroImg from "@/assets/hero.jpg";
 import fundadorImg from "@/assets/fundador.jpg";
 import ctaImg from "@/assets/cta.jpg";
-import { INSTAGRAM, WHATSAPP } from "@/lib/site";
+import { FACEBOOK, INSTAGRAM } from "@/lib/site";
 
 const TITLE = "Oferta Digital 360 | Os melhores links de ofertas e análises de produtos";
 const DESCRIPTION =
@@ -76,25 +77,16 @@ function Hero() {
             Aproveite nossas ofertas e faça parte da experiência 360!
           </p>
         </Reveal>
-        <Reveal delay={300}>
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={WHATSAPP}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-lift transition-transform hover:scale-[1.03] hover:bg-primary/90 sm:w-auto"
-            >
-              Fale com Especialista
-              <ArrowRight size={18} />
-            </a>
-            <a
-              href="#servicos"
-              className="inline-flex w-full items-center justify-center rounded-full border border-primary-foreground/35 px-8 py-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-foreground/10 sm:w-auto"
-            >
-              Saiba Mais
-            </a>
-          </div>
-        </Reveal>
+          <Reveal delay={300}>
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a
+                href="#servicos"
+                className="inline-flex w-full items-center justify-center rounded-full border border-primary-foreground/35 px-8 py-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-foreground/10 sm:w-auto"
+              >
+                Saiba Mais
+              </a>
+            </div>
+          </Reveal>
       </div>
     </section>
   );
@@ -210,9 +202,9 @@ const SERVICOS = [
     text: "Acompanhamos variações para você não pagar caro em promoção falsa e comprar no momento certo.",
   },
   {
-    icon: MessageCircle,
+    icon: Headset,
     title: "Atendimento personalizado",
-    text: "Fale direto com um especialista pelo WhatsApp e receba indicações feitas para a sua necessidade e o seu orçamento.",
+    text: "Fale direto com um especialista e receba indicações feitas para a sua necessidade e o seu orçamento.",
   },
   {
     icon: BadgeCheck,
@@ -252,9 +244,7 @@ function Servicos() {
               <h3 className="mt-5 text-lg text-card-foreground">{s.title}</h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
               <a
-                href={WHATSAPP}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contato"
                 className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-5 py-2.5 text-sm font-bold text-secondary-foreground transition-transform hover:scale-[1.03]"
               >
                 Saiba Mais
@@ -270,9 +260,9 @@ function Servicos() {
 
 const DIFERENCIAIS = [
   {
-    icon: MessageCircle,
+    icon: Headset,
     title: "Atendimento personalizado",
-    text: "Resposta de especialista no WhatsApp, com foco em resultado e não em venda a qualquer custo.",
+    text: "Resposta de especialista direta, com foco em resultado e não em venda a qualquer custo.",
   },
   {
     icon: Wallet,
@@ -437,19 +427,13 @@ function CtaFinal() {
           </ul>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a
-              href={`mailto:nandofelipeoliveira@gmail.com?subject=${encodeURIComponent("Contato pelo site — Oferta Digital 360")}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-7 py-4 text-sm font-bold text-secondary-foreground transition-transform hover:scale-[1.03]"
-            >
-              Entre em Contato
-            </a>
-            <a
-              href={WHATSAPP}
+              href={FACEBOOK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-primary-foreground/40 px-7 py-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-7 py-4 text-sm font-bold text-secondary-foreground transition-transform hover:scale-[1.03]"
             >
-              <MessageCircle size={18} />
-              WhatsApp (11) 99333-7675
+              <Facebook size={18} />
+              Achadinhos360
             </a>
             <a
               href={INSTAGRAM}

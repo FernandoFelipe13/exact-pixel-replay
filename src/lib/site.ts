@@ -1,9 +1,5 @@
-export const WHATSAPP = "https://wa.me/5511993337675";
 export const INSTAGRAM = "https://www.instagram.com/ofertadigital360/";
-export const CONTACT_EMAIL = "nandofelipeoliveira@gmail.com";
-
-export const whatsappLink = (message?: string) =>
-  message ? `${WHATSAPP}?text=${encodeURIComponent(message)}` : WHATSAPP;
+export const FACEBOOK = "https://www.facebook.com/profile.php?id=61594765829698";
 
 const CATEGORY_LIST = [
   {
@@ -237,9 +233,9 @@ const CATEGORY_LIST = [
     name: "Extras",
     title: "Ofertas Extras | Oferta Digital 360",
     description:
-      "Achadinhos, ofertas relâmpago e cupons de todas as categorias, atualizados direto no WhatsApp da Oferta Digital 360.",
+      "Achadinhos, ofertas relâmpago e cupons de todas as categorias, atualizados direto na nossa página Achadinhos360 no Facebook.",
     intro:
-      "Achadinhos e ofertas relâmpago de todas as categorias: os achados que não ficam no ar por muito tempo — chegam primeiro no WhatsApp.",
+      "Achadinhos e ofertas relâmpago de todas as categorias: os achados que não ficam no ar por muito tempo — chegam primeiro na nossa página Achadinhos360 no Facebook.",
     bulletsHeading: "Os destaques da categoria Extras",
     bullets: [
       {
