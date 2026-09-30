@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Facebook, Instagram, Menu, Music2, X } from "lucide-react";
 
-import { CATEGORIES, FACEBOOK, INSTAGRAM } from "@/lib/site";
+import { CATEGORIES, FACEBOOK, INSTAGRAM, TIKTOK } from "@/lib/site";
 import logoAsset from "@/assets/logo.png.asset.json";
 
 export function Navbar() {
@@ -140,6 +140,17 @@ export function Footer() {
                 className="transition-colors hover:text-secondary"
               >
                 @ofertadigital360
+              </a>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <Music2 size={16} className="mt-0.5 shrink-0 text-secondary" />
+              <a
+                href={TIKTOK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-colors hover:text-secondary"
+              >
+                oferta.digital.36
               </a>
             </li>
           </ul>
