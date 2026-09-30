@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CasaRouteImport } from './routes/casa'
 import { Route as CelularesRouteImport } from './routes/celulares'
 import { Route as CursosRouteImport } from './routes/cursos'
@@ -20,10 +22,20 @@ import { Route as InformaticaRouteImport } from './routes/informatica'
 import { Route as LivrosRouteImport } from './routes/livros'
 import { Route as PetRouteImport } from './routes/pet'
 import { Route as RoupasRouteImport } from './routes/roupas'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CasaRoute = CasaRouteImport.update({
@@ -76,9 +88,15 @@ const RoupasRoute = RoupasRouteImport.update({
   path: '/roupas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/casa': typeof CasaRoute
   '/celulares': typeof CelularesRoute
   '/cursos': typeof CursosRoute
@@ -89,9 +107,11 @@ export interface FileRoutesByFullPath {
   '/livros': typeof LivrosRoute
   '/pet': typeof PetRoute
   '/roupas': typeof RoupasRoute
+  '/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/casa': typeof CasaRoute
   '/celulares': typeof CelularesRoute
   '/cursos': typeof CursosRoute
@@ -102,10 +122,13 @@ export interface FileRoutesByTo {
   '/livros': typeof LivrosRoute
   '/pet': typeof PetRoute
   '/roupas': typeof RoupasRoute
+  '/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/casa': typeof CasaRoute
   '/celulares': typeof CelularesRoute
   '/cursos': typeof CursosRoute
@@ -116,11 +139,13 @@ export interface FileRoutesById {
   '/livros': typeof LivrosRoute
   '/pet': typeof PetRoute
   '/roupas': typeof RoupasRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/casa'
     | '/celulares'
     | '/cursos'
@@ -131,9 +156,11 @@ export interface FileRouteTypes {
     | '/livros'
     | '/pet'
     | '/roupas'
+    | '/admin'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/casa'
     | '/celulares'
     | '/cursos'
@@ -144,9 +171,12 @@ export interface FileRouteTypes {
     | '/livros'
     | '/pet'
     | '/roupas'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/casa'
     | '/celulares'
     | '/cursos'
@@ -157,10 +187,13 @@ export interface FileRouteTypes {
     | '/livros'
     | '/pet'
     | '/roupas'
+    | '/_authenticated/admin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   CasaRoute: typeof CasaRoute
   CelularesRoute: typeof CelularesRoute
   CursosRoute: typeof CursosRoute
@@ -180,6 +213,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/casa': {
@@ -252,11 +299,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoupasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   CasaRoute: CasaRoute,
   CelularesRoute: CelularesRoute,
   CursosRoute: CursosRoute,
