@@ -55,6 +55,7 @@ export function Navbar() {
               {item.emoji} {item.name}
             </Link>
           ))}
+        </nav>
 
         <button
           type="button"
