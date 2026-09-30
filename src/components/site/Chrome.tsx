@@ -150,7 +150,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-secondary"
               >
-                oferta.digital.36
+                @oferta.digital.36
               </a>
             </li>
           </ul>
