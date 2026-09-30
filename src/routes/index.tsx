@@ -18,8 +18,8 @@ import {
 } from "lucide-react";
 
 import { Reveal } from "@/components/site/Reveal";
+import { LatestOffers } from "@/components/site/LatestOffers";
 import heroImg from "@/assets/hero.jpg";
-import fundadorImg from "@/assets/fundador.jpg";
 import ctaImg from "@/assets/cta.jpg";
 import { FACEBOOK, INSTAGRAM } from "@/lib/site";
 
@@ -92,93 +92,6 @@ function Hero() {
   );
 }
 
-const TIMELINE = [
-  {
-    year: "O começo",
-    title: "Uma dúvida de compra que virou negócio",
-    text: "Cansado de ver gente pagando caro por produtos ruins, começamos a testar, comparar e recomendar apenas o que realmente vale o preço.",
-  },
-  {
-    year: "A curadoria",
-    title: "Análises antes de cada indicação",
-    text: "Cada produto passa por pesquisa de reputação, comparação de preço histórico e leitura de experiências reais de quem já comprou.",
-  },
-  {
-    year: "Hoje",
-    title: "Relacionamento acima da venda",
-    text: "Atendemos de forma personalizada, tiramos dúvidas item por item e só enviamos o link quando a escolha faz sentido para você.",
-  },
-];
-
-const NUMEROS = [
-  { value: "+5 anos", label: "de experiência em vendas online" },
-  { value: "+2.000", label: "pessoas orientadas na escolha" },
-  { value: "+30", label: "categorias de produtos acompanhadas" },
-  { value: "100%", label: "das indicações analisadas antes" },
-];
-
-function Sobre() {
-  return (
-    <section id="sobre" className="bg-background py-24">
-      <div className="mx-auto max-w-6xl px-5">
-        <div className="grid items-start gap-14 lg:grid-cols-[1fr_0.85fr]">
-          <div>
-            <Reveal>
-              <p className="text-xs font-bold uppercase tracking-widest text-primary">Sobre nós</p>
-              <h2 className="mt-3 text-3xl text-foreground sm:text-4xl">
-                Qualidade e relacionamento duradouro no centro de tudo
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                A Oferta Digital 360 nasceu com um propósito simples: buscar constantemente as
-                melhores opções em produtos variados, sempre com as tendências mais atuais, sem
-                abrir mão da qualidade.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                Nosso diferencial é o atendimento personalizado com foco em resultados e a expertise
-                no segmento de vendas online. Não empurramos produto: orientamos a decisão.
-              </p>
-            </Reveal>
-
-            <ol className="mt-12 space-y-0 border-l border-border pl-8">
-              {TIMELINE.map((item, i) => (
-                <Reveal as="li" key={item.title} delay={i * 120} className="relative pb-10">
-                  <span
-                    className="absolute -left-[41px] mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary ring-4 ring-primary-soft"
-                    aria-hidden="true"
-                  />
-                  <p className="text-xs font-bold uppercase tracking-widest text-secondary-foreground">
-                    {item.year}
-                  </p>
-                  <h3 className="mt-2 text-lg text-foreground">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-
-          <Reveal delay={150} className="lg:sticky lg:top-28">
-            <img
-              src={fundadorImg}
-              alt="Fernando Felipe, fundador da Oferta Digital 360, em seu escritório"
-              width={1024}
-              height={1280}
-              loading="lazy"
-              className="w-full rounded-2xl object-cover shadow-lift"
-            />
-            <dl className="mt-6 grid grid-cols-2 gap-4">
-              {NUMEROS.map((n) => (
-                <div key={n.label} className="rounded-xl bg-primary-soft p-4">
-                  <dt className="font-display text-2xl font-extrabold text-primary">{n.value}</dt>
-                  <dd className="mt-1 text-xs leading-snug text-muted-foreground">{n.label}</dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 const SERVICOS = [
   {
@@ -456,7 +369,7 @@ function Index() {
   return (
     <main>
       <Hero />
-      <Sobre />
+      <LatestOffers />
       <Servicos />
       <Diferenciais />
       <Depoimentos />
