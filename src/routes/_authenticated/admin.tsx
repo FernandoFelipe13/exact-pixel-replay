@@ -20,7 +20,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminPage,
 });
 
-const EMPTY = { title: "", category: CATEGORIES[0].slug as string, store_name: "", link: "", image_url: "" };
+const EMPTY = { title: "", category: "casa" as string, store_name: "", link: "", image_url: "" };
 
 function AdminPage() {
   const qc = useQueryClient();
