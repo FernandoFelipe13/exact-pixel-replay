@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, BadgeCheck, Facebook } from "lucide-react";
 
+import { LatestOffers } from "@/components/site/LatestOffers";
 import { Reveal } from "@/components/site/Reveal";
 import { FACEBOOK, type Category } from "@/lib/site";
 
@@ -76,7 +77,9 @@ export function CategoryPage({ category }: { category: Category }) {
         </div>
       </section>
 
-      <section className="bg-background py-20">
+      <LatestOffers category={category.slug} />
+
+      <section className="bg-muted py-20">
         <Reveal className="mx-auto max-w-3xl px-5 text-center">
           <h2 className="text-3xl text-foreground sm:text-4xl">Não achou o que procurava?</h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
