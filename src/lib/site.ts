@@ -1,5 +1,6 @@
 export const INSTAGRAM = "https://www.instagram.com/ofertadigital360/";
 export const FACEBOOK = "https://www.facebook.com/profile.php?id=61594765829698";
+export const TIKTOK = "https://www.tiktok.com/@oferta.digital.36";
 
 const CATEGORY_LIST = [
   {

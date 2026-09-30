@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Facebook, Instagram, Menu, X } from "lucide-react";
+import { Facebook, Instagram, Menu, Music2, X } from "lucide-react";
 
 import { CATEGORIES, FACEBOOK, INSTAGRAM } from "@/lib/site";
 import logoAsset from "@/assets/logo.png.asset.json";
