@@ -9,7 +9,6 @@ import {
   Headset,
   Instagram,
   Link2,
-  Quote,
   Scale,
   ShieldCheck,
   Sparkles,
@@ -235,74 +234,6 @@ function Diferenciais() {
   );
 }
 
-const DEPOIMENTOS = [
-  {
-    nome: "Juliana Prado",
-    cargo: "Gerente de compras, JP Distribuidora",
-    texto:
-      "Precisávamos equipar o escritório sem estourar o orçamento. A análise comparativa economizou cerca de 22% na compra e nenhum item deu problema.",
-    inicial: "JP",
-  },
-  {
-    nome: "Rafael Menezes",
-    cargo: "Fotógrafo autônomo",
-    texto:
-      "Estava em dúvida entre três modelos há semanas. Em uma conversa recebi a análise completa e o melhor link. Segurança total na escolha.",
-    inicial: "RM",
-  },
-  {
-    nome: "Camila Souza",
-    cargo: "Sócia, Ateliê Duas Marias",
-    texto:
-      "O atendimento é realmente personalizado. Me avisaram para esperar dois dias e o preço caiu de verdade. Virou meu canal de consulta antes de qualquer compra.",
-    inicial: "CS",
-  },
-];
-
-function Depoimentos() {
-  return (
-    <section id="depoimentos" className="bg-muted py-24">
-      <div className="mx-auto max-w-6xl px-5">
-        <Reveal className="max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-widest text-primary">
-            Depoimentos e prova social
-          </p>
-          <h2 className="mt-3 text-3xl text-foreground sm:text-4xl">
-            Clientes satisfeitos, escolhas com confiança
-          </h2>
-        </Reveal>
-
-        <ul className="mt-14 grid gap-6 md:grid-cols-3">
-          {DEPOIMENTOS.map((d, i) => (
-            <Reveal
-              as="li"
-              key={d.nome}
-              delay={i * 120}
-              className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 shadow-card transition-transform duration-300 hover:-translate-y-1.5"
-            >
-              <Quote size={28} className="text-secondary" aria-hidden="true" />
-              <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-card-foreground">
-                “{d.texto}”
-              </blockquote>
-              <figcaption className="mt-6 flex items-center gap-3 border-t border-border pt-5">
-                <span
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-primary font-display text-sm font-bold text-primary-foreground"
-                  aria-hidden="true"
-                >
-                  {d.inicial}
-                </span>
-                <span>
-                  <span className="block text-sm font-bold text-foreground">{d.nome}</span>
-                  <span className="block text-xs text-muted-foreground">{d.cargo}</span>
-                </span>
-              </figcaption>
-            </Reveal>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
 
 function CtaFinal() {
   return (
@@ -372,7 +303,6 @@ function Index() {
       <LatestOffers />
       <Servicos />
       <Diferenciais />
-      <Depoimentos />
       <CtaFinal />
     </main>
   );
