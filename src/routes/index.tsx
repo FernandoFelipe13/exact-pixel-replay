@@ -4,23 +4,16 @@ import {
   ArrowRight,
   BadgeCheck,
   BarChart3,
-  Clock,
-  Facebook,
-  Headset,
-  Instagram,
   Link2,
   Scale,
-  ShieldCheck,
   Sparkles,
   Tag,
-  Wallet,
 } from "lucide-react";
 
 import { Reveal } from "@/components/site/Reveal";
 import { LatestOffers } from "@/components/site/LatestOffers";
 import heroImg from "@/assets/hero.jpg";
-import ctaImg from "@/assets/cta.jpg";
-import { FACEBOOK, INSTAGRAM } from "@/lib/site";
+import { FACEBOOK } from "@/lib/site";
 
 const TITLE = "Oferta Digital 360 | Os melhores links de ofertas e análises de produtos";
 const DESCRIPTION =
@@ -151,7 +144,9 @@ function Servicos() {
               <h3 className="mt-5 text-lg text-card-foreground">{s.title}</h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
               <a
-                href="#contato"
+                href={FACEBOOK}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-5 py-2.5 text-sm font-bold text-secondary-foreground transition-transform hover:scale-[1.03]"
               >
                 Saiba Mais
@@ -165,140 +160,12 @@ function Servicos() {
   );
 }
 
-const DIFERENCIAIS = [
-  {
-    icon: Headset,
-    title: "Atendimento personalizado",
-    text: "Resposta de especialista direta, com foco em resultado e não em venda a qualquer custo.",
-  },
-  {
-    icon: Wallet,
-    title: "Custo zero para você",
-    text: "A orientação e as análises não têm custo: você paga apenas o preço do produto na loja.",
-  },
-  {
-    icon: Clock,
-    title: "Resposta no mesmo dia",
-    text: "Dúvidas respondidas em horário comercial, normalmente em poucas horas.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Só lojas confiáveis",
-    text: "Indicamos apenas links de lojas conhecidas, com política de troca e prazo de entrega claro.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Qualidade inegociável",
-    text: "Produto sem qualidade comprovada não entra na nossa lista, mesmo com preço baixo.",
-  },
-  {
-    icon: Sparkles,
-    title: "Tendências atuais",
-    text: "Acompanhamos lançamentos e novidades de mais de 30 categorias todos os meses.",
-  },
-];
-
-function Diferenciais() {
-  return (
-    <section id="diferenciais" className="bg-background py-24">
-      <div className="mx-auto max-w-6xl px-5">
-        <Reveal className="max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-widest text-primary">
-            Diferenciais competitivos
-          </p>
-          <h2 className="mt-3 text-3xl text-foreground sm:text-4xl">
-            Por que confiar na Oferta Digital 360
-          </h2>
-        </Reveal>
-
-        <ul className="mt-14 grid gap-x-10 gap-y-9 sm:grid-cols-2">
-          {DIFERENCIAIS.map((d, i) => (
-            <Reveal as="li" key={d.title} delay={(i % 2) * 100} className="flex gap-4">
-              <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-secondary/20 text-secondary-foreground">
-                <d.icon size={20} aria-hidden="true" />
-              </span>
-              <div>
-                <h3 className="text-base text-foreground">{d.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{d.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-
-function CtaFinal() {
-  return (
-    <section id="contato" className="bg-gradient-primary">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 lg:grid-cols-2 lg:py-24">
-        <Reveal>
-          <img
-            src={ctaImg}
-            alt="Cliente recebendo entrega de um produto comprado com oferta indicada"
-            width={1280}
-            height={1280}
-            loading="lazy"
-            className="w-full rounded-2xl object-cover shadow-lift"
-          />
-        </Reveal>
-        <Reveal delay={120}>
-          <h2 className="text-3xl text-primary-foreground sm:text-4xl">
-            Resultados excepcionais que superam expectativas e geram valor real
-          </h2>
-          <p className="mt-5 text-base text-primary-foreground/85">
-            Sem custo de consultoria, sem enrolação: você recebe a análise, o prazo de entrega da
-            loja e o melhor link de oferta antes de decidir.
-          </p>
-          <ul className="mt-6 space-y-2.5 text-sm text-primary-foreground/90">
-            {[
-              "Orientação gratuita — você paga só o produto",
-              "Prazo de entrega informado antes da compra",
-              "Apenas lojas confiáveis e produtos de qualidade",
-            ].map((item) => (
-              <li key={item} className="flex items-start gap-2.5">
-                <BadgeCheck size={18} className="mt-0.5 shrink-0 text-secondary" />
-                {item}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={FACEBOOK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-7 py-4 text-sm font-bold text-secondary-foreground transition-transform hover:scale-[1.03]"
-            >
-              <Facebook size={18} />
-              Achadinhos360
-            </a>
-            <a
-              href={INSTAGRAM}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-primary-foreground/40 px-7 py-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
-            >
-              <Instagram size={18} />
-              @ofertadigital360
-            </a>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-
 function Index() {
   return (
     <main>
       <Hero />
       <LatestOffers />
       <Servicos />
-      <Diferenciais />
-      <CtaFinal />
     </main>
   );
 }
