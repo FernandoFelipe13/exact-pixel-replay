@@ -114,11 +114,6 @@ const SERVICOS = [
     text: "Acompanhamos variações para você não pagar caro em promoção falsa e comprar no momento certo.",
   },
   {
-    icon: Headset,
-    title: "Atendimento personalizado",
-    text: "Fale direto com um especialista e receba indicações feitas para a sua necessidade e o seu orçamento.",
-  },
-  {
     icon: BadgeCheck,
     title: "Curadoria de tendências",
     text: "Selecionamos os lançamentos que realmente valem a pena, com foco em qualidade e não apenas em novidade.",
