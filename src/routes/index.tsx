@@ -303,7 +303,6 @@ function Index() {
       <LatestOffers />
       <Servicos />
       <Diferenciais />
-      <Depoimentos />
       <CtaFinal />
     </main>
   );
