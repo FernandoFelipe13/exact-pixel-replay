@@ -155,6 +155,12 @@ export function Footer() {
             </li>
           </ul>
 
+          <Link
+            to="/auth"
+            className="mt-5 inline-block text-xs text-primary-foreground/50 transition-colors hover:text-secondary"
+          >
+            Área administrativa
+          </Link>
         </div>
       </div>
 
