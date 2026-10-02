@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = ".output/public"
+  publish = ".netlify/edge-functions/dist"
 
 [build.environment]
-  NITRO_PRESET = "netlify"
+  NITRO_PRESET = "netlify-edge"
