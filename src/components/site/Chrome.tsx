@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Facebook, Instagram, Menu, Music2, X } from "lucide-react";
 
 import { CATEGORIES, FACEBOOK, INSTAGRAM, TIKTOK } from "@/lib/site";
-import logoAsset from "@/assets/logo.png.asset.json";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -25,7 +24,7 @@ export function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
         <Link to="/" className="flex shrink-0 items-center gap-2.5">
           <img
-            src={logoAsset.url}
+            src="/logo-oferta-digital-360.png"
             alt="Logo Oferta Digital 360"
             className="h-11 w-11 rounded-full object-contain"
           />
