@@ -104,6 +104,31 @@ const CATEGORY_LIST = [
     ],
   },
   {
+    slug: "diversao",
+    emoji: "⭐",
+    name: "Diversão & Colecionáveis",
+    title: "Ofertas de Diversão & Colecionáveis | Oferta Digital 360",
+    description:
+      "Brinquedos, jogos de tabuleiro, action figures e itens de coleção com curadoria da Oferta Digital 360 e os melhores preços da internet.",
+    intro:
+      "Brinquedos, jogos de tabuleiro, action figures e itens de coleção: acompanhamos lançamentos e edições raras para você pagar o melhor preço.",
+    bulletsHeading: "Os destaques da categoria Diversão & Colecionáveis",
+    bullets: [
+      {
+        title: "Brinquedos e jogos",
+        text: "Brinquedos, jogos de tabuleiro e quebra-cabeças com idade indicada e qualidade verificada.",
+      },
+      {
+        title: "Action figures e bonecos",
+        text: "Figuras, bonecos e kits de montagem de marcas oficiais, com preço comparado antes de indicar.",
+      },
+      {
+        title: "Edições raras e coleções",
+        text: "Colecionáveis, vitrines e edições especiais que esgotam rápido — avisamos assim que aparecem.",
+      },
+    ],
+  },
+  {
     slug: "roupas",
     emoji: "👕",
     name: "Roupas",
