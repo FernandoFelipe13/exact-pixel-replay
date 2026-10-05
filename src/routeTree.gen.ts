@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CasaRouteImport } from './routes/casa'
 import { Route as CelularesRouteImport } from './routes/celulares'
 import { Route as CursosRouteImport } from './routes/cursos'
+import { Route as DiversaoRouteImport } from './routes/diversao'
 import { Route as ExtrasRouteImport } from './routes/extras'
 import { Route as FitnessRouteImport } from './routes/fitness'
 import { Route as GamesRouteImport } from './routes/games'
@@ -51,6 +52,11 @@ const CelularesRoute = CelularesRouteImport.update({
 const CursosRoute = CursosRouteImport.update({
   id: '/cursos',
   path: '/cursos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiversaoRoute = DiversaoRouteImport.update({
+  id: '/diversao',
+  path: '/diversao',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExtrasRoute = ExtrasRouteImport.update({
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/casa': typeof CasaRoute
   '/celulares': typeof CelularesRoute
   '/cursos': typeof CursosRoute
+  '/diversao': typeof DiversaoRoute
   '/extras': typeof ExtrasRoute
   '/fitness': typeof FitnessRoute
   '/games': typeof GamesRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/casa': typeof CasaRoute
   '/celulares': typeof CelularesRoute
   '/cursos': typeof CursosRoute
+  '/diversao': typeof DiversaoRoute
   '/extras': typeof ExtrasRoute
   '/fitness': typeof FitnessRoute
   '/games': typeof GamesRoute
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/casa': typeof CasaRoute
   '/celulares': typeof CelularesRoute
   '/cursos': typeof CursosRoute
+  '/diversao': typeof DiversaoRoute
   '/extras': typeof ExtrasRoute
   '/fitness': typeof FitnessRoute
   '/games': typeof GamesRoute
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
     | '/casa'
     | '/celulares'
     | '/cursos'
+    | '/diversao'
     | '/extras'
     | '/fitness'
     | '/games'
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
     | '/casa'
     | '/celulares'
     | '/cursos'
+    | '/diversao'
     | '/extras'
     | '/fitness'
     | '/games'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/casa'
     | '/celulares'
     | '/cursos'
+    | '/diversao'
     | '/extras'
     | '/fitness'
     | '/games'
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   CasaRoute: typeof CasaRoute
   CelularesRoute: typeof CelularesRoute
   CursosRoute: typeof CursosRoute
+  DiversaoRoute: typeof DiversaoRoute
   ExtrasRoute: typeof ExtrasRoute
   FitnessRoute: typeof FitnessRoute
   GamesRoute: typeof GamesRoute
@@ -248,6 +261,13 @@ declare module '@tanstack/react-router' {
       path: '/cursos'
       fullPath: '/cursos'
       preLoaderRoute: typeof CursosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diversao': {
+      id: '/diversao'
+      path: '/diversao'
+      fullPath: '/diversao'
+      preLoaderRoute: typeof DiversaoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/extras': {
@@ -327,6 +347,7 @@ const rootRouteChildren: RootRouteChildren = {
   CasaRoute: CasaRoute,
   CelularesRoute: CelularesRoute,
   CursosRoute: CursosRoute,
+  DiversaoRoute: DiversaoRoute,
   ExtrasRoute: ExtrasRoute,
   FitnessRoute: FitnessRoute,
   GamesRoute: GamesRoute,

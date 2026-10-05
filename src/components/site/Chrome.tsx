@@ -39,13 +39,13 @@ export function Navbar() {
 
         <nav
           aria-label="Navegação principal"
-          className="hidden items-center gap-x-4 lg:flex"
+          className="hidden items-center gap-x-2 lg:flex xl:gap-x-4"
         >
           {CATEGORIES.map((item) => (
             <Link
               key={item.slug}
               to={`/${item.slug}`}
-              className={`whitespace-nowrap text-[13px] font-semibold transition-colors ${
+              className={`whitespace-nowrap text-[11.5px] font-semibold transition-colors xl:text-[13px] ${
                 solid
                   ? "text-muted-foreground hover:text-primary"
                   : "text-primary-foreground/80 hover:text-primary-foreground"
