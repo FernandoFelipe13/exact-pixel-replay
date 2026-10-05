@@ -6,6 +6,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { offersQuery } from "@/lib/offers";
 import { CATEGORIES } from "@/lib/site";
+import { SUBCATEGORIES, subValue } from "@/lib/subcategories";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminPage,
 });
 
-const EMPTY = { title: "", category: "casa" as string, store_name: "", link: "", image_url: "" };
+const EMPTY = { title: "", category: "casa" as string, subcategory: "", store_name: "", link: "", image_url: "" };
 
 function AdminPage() {
   const qc = useQueryClient();
@@ -39,7 +40,7 @@ function AdminPage() {
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setMsg(null);
-    const { error } = await supabase.from("offers").insert({ ...form, image_url: form.image_url || null });
+    const { error } = await supabase.from("offers").insert({ ...form, image_url: form.image_url || null, subcategory: form.subcategory || null });
     if (error) return setMsg("Não foi possível salvar: " + error.message);
     setForm(EMPTY);
     setMsg("Oferta publicada!");
@@ -80,10 +81,25 @@ function AdminPage() {
 
       <form onSubmit={save} className="mt-8 grid gap-4 rounded-2xl border border-border bg-card p-6 shadow-card sm:grid-cols-2">
         <input className={input + " sm:col-span-2"} required placeholder="Nome do produto" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
-        <select className={input} value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
+        <select className={input} value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value, subcategory: "" })}>
           {CATEGORIES.map((c) => (
             <option key={c.slug} value={c.slug}>{c.emoji} {c.name}</option>
           ))}
+        </select>
+        <select className={input} value={form.subcategory} onChange={(e) => setForm({ ...form, subcategory: e.target.value })}>
+          <option value="">Subcategoria (opcional)</option>
+          {(SUBCATEGORIES[form.category] ?? []).map((g) =>
+            g.items.length === 0 ? (
+              <option key={g.group} value={g.group}>{g.group}</option>
+            ) : (
+              <optgroup key={g.group} label={g.group}>
+                <option value={g.group}>{g.group} (geral)</option>
+                {g.items.map((i) => (
+                  <option key={i} value={subValue(g.group, i)}>{i}</option>
+                ))}
+              </optgroup>
+            ),
+          )}
         </select>
         <input className={input} required placeholder="Nome da loja (ex.: Amazon)" value={form.store_name} onChange={(e) => setForm({ ...form, store_name: e.target.value })} />
         <input className={input + " sm:col-span-2"} required type="url" placeholder="Link da oferta (https://...)" value={form.link} onChange={(e) => setForm({ ...form, link: e.target.value })} />
@@ -99,7 +115,7 @@ function AdminPage() {
             {o.image_url && <img src={o.image_url} alt="" className="h-12 w-12 rounded-lg object-cover" />}
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold text-card-foreground">{o.title}</p>
-              <p className="text-xs text-muted-foreground">{CATEGORIES.find((c) => c.slug === o.category)?.name} · {o.store_name}</p>
+              <p className="text-xs text-muted-foreground">{CATEGORIES.find((c) => c.slug === o.category)?.name}{o.subcategory ? ` › ${o.subcategory}` : ""} · {o.store_name}</p>
             </div>
             <button onClick={() => remove(o.id)} aria-label="Apagar oferta" className="text-muted-foreground hover:text-destructive">
               <Trash2 size={18} />

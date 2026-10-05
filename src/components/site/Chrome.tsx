@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Facebook, Instagram, Menu, Music2, X } from "lucide-react";
 
 import { CATEGORIES, FACEBOOK, INSTAGRAM, TIKTOK } from "@/lib/site";
+import { SUBCATEGORIES, subValue } from "@/lib/subcategories";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -41,9 +42,9 @@ export function Navbar() {
           aria-label="Navegação principal"
           className="hidden items-center gap-x-2 lg:flex xl:gap-x-4"
         >
-          {CATEGORIES.map((item) => (
+          {CATEGORIES.map((item, idx) => (
+            <div key={item.slug} className="group relative">
             <Link
-              key={item.slug}
               to={`/${item.slug}`}
               className={`whitespace-nowrap text-[11.5px] font-semibold transition-colors xl:text-[13px] ${
                 solid
@@ -53,6 +54,43 @@ export function Navbar() {
             >
               {item.emoji} {item.name}
             </Link>
+            {(SUBCATEGORIES[item.slug] ?? []).length > 0 && (
+              <div
+                className={`invisible absolute top-full z-50 pt-3 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 ${
+                  idx > CATEGORIES.length / 2 ? "right-0" : "left-0"
+                }`}
+              >
+                <div className="grid w-max max-w-[640px] grid-cols-2 gap-x-8 gap-y-4 rounded-2xl border border-border bg-background p-5 shadow-lift">
+                  {(SUBCATEGORIES[item.slug] ?? []).map((g) => (
+                    <div key={g.group} className="min-w-[150px]">
+                      <Link
+                        to={`/${item.slug}`}
+                        search={{ sub: g.group } as never}
+                        className="text-sm font-bold text-foreground hover:text-primary"
+                      >
+                        {g.group}
+                      </Link>
+                      {g.items.length > 0 && (
+                        <ul className="mt-1.5 space-y-1">
+                          {g.items.map((i) => (
+                            <li key={i}>
+                              <Link
+                                to={`/${item.slug}`}
+                                search={{ sub: subValue(g.group, i) } as never}
+                                className="text-xs text-muted-foreground hover:text-primary"
+                              >
+                                {i}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            </div>
           ))}
         </nav>
 
@@ -73,14 +111,28 @@ export function Navbar() {
           className="max-h-[70vh] overflow-y-auto border-t border-border bg-background px-5 pb-5 pt-2 lg:hidden"
         >
           {CATEGORIES.map((item) => (
+            <div key={item.slug}>
             <Link
-              key={item.slug}
               to={`/${item.slug}`}
               onClick={() => setOpen(false)}
-              className="block py-3 text-sm font-semibold text-foreground"
+              className="block pt-3 text-sm font-semibold text-foreground"
             >
               {item.emoji} {item.name}
             </Link>
+            <div className="flex flex-wrap gap-x-3 gap-y-1 pb-2 pl-6 pt-1">
+              {(SUBCATEGORIES[item.slug] ?? []).map((g) => (
+                <Link
+                  key={g.group}
+                  to={`/${item.slug}`}
+                  search={{ sub: g.group } as never}
+                  onClick={() => setOpen(false)}
+                  className="text-xs text-muted-foreground"
+                >
+                  {g.group}
+                </Link>
+              ))}
+            </div>
+            </div>
           ))}
         </nav>
 
