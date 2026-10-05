@@ -5,7 +5,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { offersQuery } from "@/lib/offers";
 import { CATEGORIES } from "@/lib/site";
 
-export function LatestOffers({ category, sub }: { category?: string; sub?: string }) {
+export function LatestOffers({ category, sub }: { category?: string; sub?: string | undefined }) {
   const { data, isLoading, isError } = useQuery(offersQuery(category, 12, sub));
   const catName = (slug: string) => CATEGORIES.find((c) => c.slug === slug);
 

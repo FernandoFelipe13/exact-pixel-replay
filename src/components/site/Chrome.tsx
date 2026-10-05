@@ -61,7 +61,7 @@ export function Navbar() {
                 }`}
               >
                 <div className="grid w-max max-w-[640px] grid-cols-2 gap-x-8 gap-y-4 rounded-2xl border border-border bg-background p-5 shadow-lift">
-                  {SUBCATEGORIES[item.slug].map((g) => (
+                  {(SUBCATEGORIES[item.slug] ?? []).map((g) => (
                     <div key={g.group} className="min-w-[150px]">
                       <Link
                         to={`/${item.slug}`}
