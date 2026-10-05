@@ -5,8 +5,8 @@ import { Reveal } from "@/components/site/Reveal";
 import { offersQuery } from "@/lib/offers";
 import { CATEGORIES } from "@/lib/site";
 
-export function LatestOffers({ category }: { category?: string }) {
-  const { data, isLoading, isError } = useQuery(offersQuery(category));
+export function LatestOffers({ category, sub }: { category?: string; sub?: string }) {
+  const { data, isLoading, isError } = useQuery(offersQuery(category, 12, sub));
   const catName = (slug: string) => CATEGORIES.find((c) => c.slug === slug);
 
   return (
@@ -48,7 +48,7 @@ export function LatestOffers({ category }: { category?: string }) {
                   <div className="flex flex-1 flex-col p-5">
                     {c && (
                       <span className="text-xs font-bold uppercase tracking-widest text-primary">
-                        {c.emoji} {c.name}
+                        {c.emoji} {c.name}{o.subcategory ? ` · ${o.subcategory}` : ""}
                       </span>
                     )}
                     <h3 className="mt-2 text-base text-card-foreground">{o.title}</h3>
