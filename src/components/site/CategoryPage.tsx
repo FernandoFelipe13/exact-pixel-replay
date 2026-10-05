@@ -1,11 +1,19 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useSearch } from "@tanstack/react-router";
 import { ArrowRight, BadgeCheck, Facebook } from "lucide-react";
 
 import { LatestOffers } from "@/components/site/LatestOffers";
 import { Reveal } from "@/components/site/Reveal";
 import { FACEBOOK, type Category } from "@/lib/site";
+import { SUBCATEGORIES, subValue } from "@/lib/subcategories";
 
 export function CategoryPage({ category }: { category: Category }) {
+  const search = useSearch({ strict: false }) as { sub?: string };
+  const sub = typeof search.sub === "string" ? search.sub : undefined;
+  const groups = SUBCATEGORIES[category.slug] ?? [];
+  const chip = (active: boolean) =>
+    `rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
+      active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-foreground hover:border-primary"
+    }`;
 
   return (
     <div>
@@ -77,7 +85,36 @@ export function CategoryPage({ category }: { category: Category }) {
         </div>
       </section>
 
-      <LatestOffers category={category.slug} />
+      {groups.length > 0 && (
+        <section className="mx-auto max-w-6xl px-5 pt-16">
+          <h2 className="text-xl text-foreground">Subcategorias</h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link to={`/${category.slug}`} search={{} as never} className={chip(!sub)}>Todas</Link>
+            {groups.map((g) => (
+              <Link key={g.group} to={`/${category.slug}`} search={{ sub: g.group } as never} className={chip(sub === g.group)}>
+                {g.group}
+              </Link>
+            ))}
+          </div>
+          {(() => {
+            const g = groups.find((x) => sub === x.group || sub?.startsWith(`${x.group} / `));
+            if (!g || g.items.length === 0) return null;
+            return (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {g.items.map((i) => {
+                  const v = subValue(g.group, i);
+                  return (
+                    <Link key={i} to={`/${category.slug}`} search={{ sub: v } as never} className={chip(sub === v)}>
+                      {i}
+                    </Link>
+                  );
+                })}
+              </div>
+            );
+          })()}
+        </section>
+      )}
+      <LatestOffers category={category.slug} sub={sub} />
 
       <section className="bg-muted py-20">
         <Reveal className="mx-auto max-w-3xl px-5 text-center">
