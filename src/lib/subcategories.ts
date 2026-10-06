@@ -5,10 +5,12 @@ export const subValue = (group: string, item?: string) => (item ? `${group} / ${
 
 export const SUBCATEGORIES: Record<string, SubGroup[]> = {
   casa: [
-    { group: "Decoração", items: ["Quadros", "Vasos", "Iluminação decorativa"] },
-    { group: "Cozinha", items: ["Utensílios", "Eletroportáteis", "Organizadores"] },
-    { group: "Limpeza", items: ["Produtos de limpeza", "Acessórios (vassouras, mop, etc.)"] },
-    { group: "Organização", items: ["Caixas organizadoras", "Organizadores de armário"] },
+    { group: "🛋️ Decoração", items: [] },
+    { group: "🍳 Cozinha", items: [] },
+    { group: "🔌 Eletroportáteis", items: [] },
+    { group: "🏠 Eletrodomésticos", items: [] },
+    { group: "🧹 Limpeza", items: [] },
+    { group: "📦 Organização", items: [] },
   ],
   informatica: [
     { group: "Computadores", items: ["Desktops", "Notebooks"] },
