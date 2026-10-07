@@ -1,11 +1,12 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Facebook, Instagram, Menu, Music2, X } from "lucide-react";
+import { Facebook, Instagram, Menu, Music2, Search, X } from "lucide-react";
 
 import { CATEGORIES, FACEBOOK, INSTAGRAM, TIKTOK } from "@/lib/site";
 import { SUBCATEGORIES, subValue } from "@/lib/subcategories";
 
 export function Navbar() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
 
@@ -104,6 +105,31 @@ export function Navbar() {
           {open ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
+
+      <form
+        role="search"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const q = String(new FormData(e.currentTarget).get("q") ?? "").trim();
+          setOpen(false);
+          navigate({ to: "/busca", search: { q } });
+        }}
+        className="mx-auto max-w-3xl px-5 pb-3"
+      >
+        <label className="flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 shadow-card">
+          <Search size={18} className="shrink-0 text-muted-foreground" aria-hidden="true" />
+          <input
+            name="q"
+            type="search"
+            placeholder="Buscar produtos, lojas, categorias…"
+            aria-label="Buscar no site"
+            className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+          />
+          <button type="submit" className="rounded-full bg-secondary px-4 py-1.5 text-xs font-bold text-secondary-foreground">
+            Buscar
+          </button>
+        </label>
+      </form>
 
       {open && (
         <nav
