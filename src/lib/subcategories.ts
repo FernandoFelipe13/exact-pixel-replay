@@ -52,9 +52,9 @@ export const SUBCATEGORIES: Record<string, SubGroup[]> = {
   ],
   fitness: [
     { group: "Equipamentos", items: ["Halteres", "Esteiras", "Bicicletas ergométricas"] },
-    { group: "Acessórios", items: ["Cordas de pular", "Luvas", "Garrafas térmicas"] },
+    { group: "Acessórios", items: [] },
     { group: "Roupas Fitness", items: ["Masculino", "Feminino"] },
-    { group: "Suplementos", items: ["Proteínas", "Vitaminas"] },
+    { group: "Suplementos", items: [] },
   ],
   pet: [
     {
