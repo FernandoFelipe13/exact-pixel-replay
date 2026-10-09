@@ -114,7 +114,7 @@ export function CategoryPage({ category }: { category: Category }) {
           })()}
         </section>
       )}
-      <LatestOffers category={category.slug} sub={sub} />
+      <LatestOffers category={category.slug} sub={sub} grid />
 
       <section className="bg-muted py-20">
         <Reveal className="mx-auto max-w-3xl px-5 text-center">
