@@ -46,7 +46,7 @@ export const SUBCATEGORIES: Record<string, SubGroup[]> = {
   ],
   roupas: [
     { group: "Masculino", items: ["Camisetas", "Calças", "Jaquetas", "Roupa Íntima"] },
-    { group: "Feminino", items: ["Vestidos", "Blusas", "Calças", "Roupa Íntima"] },
+    { group: "Feminino", items: ["Vestidos", "Blusas", "Camisetas", "Calças", "Jaquetas", "Roupa Íntima"] },
     { group: "Infantil", items: ["Meninos", "Meninas"] },
     { group: "Moda Praia", items: ["Biquínis", "Maiôs", "Sungas", "Shorts de praia", "Saídas de praia", "Cangas"] },
     { group: "Acessórios", items: ["Bonés", "Cintos", "Óculos"] },
