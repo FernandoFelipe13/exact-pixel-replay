@@ -45,8 +45,8 @@ export const SUBCATEGORIES: Record<string, SubGroup[]> = {
     { group: "🦖 Bonecos e Personagens", items: [] },
   ],
   roupas: [
-    { group: "Masculino", items: ["Camisetas", "Blusas", "Bermudas", "Calças", "Jaquetas", "Roupa Íntima"] },
-    { group: "Feminino", items: ["Vestidos", "Blusas", "Camisetas", "Bermudas", "Calças", "Jaquetas", "Roupa Íntima"] },
+    { group: "Masculino", items: ["Camisetas", "Camisas", "Blusas", "Bermudas", "Calças", "Jaquetas", "Roupa Íntima"] },
+    { group: "Feminino", items: ["Vestidos", "Blusas", "Camisetas", "Camisas", "Bermudas", "Calças", "Jaquetas", "Roupa Íntima"] },
     { group: "Infantil", items: ["Meninos", "Meninas"] },
     { group: "Moda Praia", items: ["Biquínis", "Maiôs", "Sungas", "Shorts de praia", "Saídas de praia", "Cangas"] },
     { group: "Acessórios", items: ["Bonés", "Cintos", "Óculos"] },
