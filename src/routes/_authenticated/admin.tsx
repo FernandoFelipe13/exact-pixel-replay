@@ -1,10 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 import { supabase } from "@/integrations/supabase/client";
-import { offersQuery } from "@/lib/offers";
+import { offersQuery, type Offer } from "@/lib/offers";
 import { CATEGORIES } from "@/lib/site";
 import { SUBCATEGORIES, subValue } from "@/lib/subcategories";
 
@@ -12,9 +12,9 @@ export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
       { title: "Painel de ofertas | Oferta Digital 360" },
-      { name: "description", content: "Cadastre e gerencie as ofertas do site." },
+      { name: "description", content: "Cadastre, edite e gerencie as ofertas do site." },
       { property: "og:title", content: "Painel de ofertas | Oferta Digital 360" },
-      { property: "og:description", content: "Cadastre e gerencie as ofertas do site." },
+      { property: "og:description", content: "Cadastre, edite e gerencie as ofertas do site." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -35,15 +35,40 @@ function AdminPage() {
   });
   const offers = useQuery(offersQuery(undefined, 100));
   const [form, setForm] = useState(EMPTY);
+  const [editing, setEditing] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+
+  function startEdit(o: Offer) {
+    setForm({
+      title: o.title,
+      category: o.category,
+      subcategory: o.subcategory ?? "",
+      store_name: o.store_name,
+      link: o.link,
+      image_url: o.image_url ?? "",
+    });
+    setEditing(o.id);
+    setMsg(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function cancelEdit() {
+    setEditing(null);
+    setForm(EMPTY);
+    setMsg(null);
+  }
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
     setMsg(null);
-    const { error } = await supabase.from("offers").insert({ ...form, image_url: form.image_url || null, subcategory: form.subcategory || null });
+    const payload = { ...form, image_url: form.image_url || null, subcategory: form.subcategory || null };
+    const { error } = editing
+      ? await supabase.from("offers").update(payload).eq("id", editing)
+      : await supabase.from("offers").insert(payload);
     if (error) return setMsg("Não foi possível salvar: " + error.message);
+    setEditing(null);
     setForm(EMPTY);
-    setMsg("Oferta publicada!");
+    setMsg(editing ? "Oferta atualizada!" : "Oferta publicada!");
     qc.invalidateQueries({ queryKey: ["offers"] });
   }
 
@@ -80,6 +105,9 @@ function AdminPage() {
       </div>
 
       <form onSubmit={save} className="mt-8 grid gap-4 rounded-2xl border border-border bg-card p-6 shadow-card sm:grid-cols-2">
+        <h2 className="text-lg font-bold text-foreground sm:col-span-2">
+          {editing ? "Editar oferta" : "Nova oferta"}
+        </h2>
         <input className={input + " sm:col-span-2"} required placeholder="Nome do produto" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
         <select className={input} value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value, subcategory: "" })}>
           {CATEGORIES.map((c) => (
@@ -104,19 +132,29 @@ function AdminPage() {
         <input className={input} required placeholder="Nome da loja (ex.: Amazon)" value={form.store_name} onChange={(e) => setForm({ ...form, store_name: e.target.value })} />
         <input className={input + " sm:col-span-2"} required type="url" placeholder="Link da oferta (https://...)" value={form.link} onChange={(e) => setForm({ ...form, link: e.target.value })} />
         <input className={input + " sm:col-span-2"} type="url" placeholder="Link da foto do produto (https://...)" value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} />
-        <button className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground sm:col-span-2">Publicar oferta</button>
+        <button className="rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground sm:col-span-2">
+          {editing ? "Salvar alterações" : "Publicar oferta"}
+        </button>
+        {editing && (
+          <button type="button" onClick={cancelEdit} className="text-sm font-semibold text-muted-foreground hover:text-foreground sm:col-span-2">
+            Cancelar edição
+          </button>
+        )}
         {msg && <p className="text-sm text-muted-foreground sm:col-span-2">{msg}</p>}
       </form>
 
       <h2 className="mt-12 text-xl text-foreground">Ofertas publicadas</h2>
       <ul className="mt-4 divide-y divide-border rounded-2xl border border-border bg-card">
         {(offers.data ?? []).map((o) => (
-          <li key={o.id} className="flex items-center gap-4 p-4">
+          <li key={o.id} className={`flex items-center gap-4 p-4 ${editing === o.id ? "bg-muted" : ""}`}>
             {o.image_url && <img src={o.image_url} alt="" className="h-12 w-12 rounded-lg object-cover" />}
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold text-card-foreground">{o.title}</p>
               <p className="text-xs text-muted-foreground">{CATEGORIES.find((c) => c.slug === o.category)?.name}{o.subcategory ? ` › ${o.subcategory}` : ""} · {o.store_name}</p>
             </div>
+            <button onClick={() => startEdit(o)} aria-label="Editar oferta" className="text-muted-foreground hover:text-primary">
+              <Pencil size={18} />
+            </button>
             <button onClick={() => remove(o.id)} aria-label="Apagar oferta" className="text-muted-foreground hover:text-destructive">
               <Trash2 size={18} />
             </button>
