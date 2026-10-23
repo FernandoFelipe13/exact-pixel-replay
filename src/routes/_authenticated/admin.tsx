@@ -196,6 +196,19 @@ function AdminPage() {
           {Object.values(statuses).filter((s) => s === "unknown").length} não confirmados (a loja bloqueou a checagem — abra para conferir)
         </p>
       )}
+      {progress && progress.total > 0 && (checking || progress.done < progress.total) && (
+        <div className="mt-3">
+          <p className="text-sm text-muted-foreground">
+            Verificando ofertas: {progress.done} de {progress.total} ({Math.round((progress.done / progress.total) * 100)}%)
+          </p>
+          <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-muted">
+            <div
+              className="h-full bg-primary transition-all"
+              style={{ width: `${(progress.done / progress.total) * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
       {checkErr && <p className="mt-3 text-sm text-destructive">{checkErr}</p>}
       <ul className="mt-4 divide-y divide-border rounded-2xl border border-border bg-card">
         {(offers.data ?? []).map((o) => (
