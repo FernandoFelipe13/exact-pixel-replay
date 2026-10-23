@@ -15,3 +15,4 @@
 - Category data (slugs, emoji, copy, WhatsApp messages) is the single source `src/lib/site.ts`; each category has its own route file (`/casa`, `/informatica`, `/celulares`, `/games`, `/roupas`, `/fitness`, `/pet`, `/cursos`, `/livros`, `/extras`) sharing `CategoryPage`.
 - The header logo is a Vite public asset at `/logo-oferta-digital-360.png`, ensuring the same root-relative URL works in development and production.
 
+- Vercel deploys use vercel.json, building with NITRO_PRESET=vercel so server functions run as Vercel functions (Lovable publish is unaffected).
