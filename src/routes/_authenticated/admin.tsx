@@ -4,6 +4,9 @@ import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+
+import { checkOfferLinks, type LinkStatus } from "@/lib/link-check.functions";
 import { offersQuery, type Offer } from "@/lib/offers";
 import { CATEGORIES } from "@/lib/site";
 import { SUBCATEGORIES, subValue } from "@/lib/subcategories";
@@ -37,6 +40,22 @@ function AdminPage() {
   const [form, setForm] = useState(EMPTY);
   const [editing, setEditing] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
+  const checkFn = useServerFn(checkOfferLinks);
+  const [checking, setChecking] = useState(false);
+  const [statuses, setStatuses] = useState<Record<string, LinkStatus> | null>(null);
+  const [checkErr, setCheckErr] = useState<string | null>(null);
+
+  async function runCheck() {
+    setChecking(true);
+    setCheckErr(null);
+    try {
+      setStatuses(await checkFn());
+    } catch {
+      setCheckErr("Não foi possível verificar os links agora. Tente novamente.");
+    } finally {
+      setChecking(false);
+    }
+  }
 
   function startEdit(o: Offer) {
     setForm({
@@ -143,7 +162,24 @@ function AdminPage() {
         {msg && <p className="text-sm text-muted-foreground sm:col-span-2">{msg}</p>}
       </form>
 
-      <h2 className="mt-12 text-xl text-foreground">Ofertas publicadas</h2>
+      <div className="mt-12 flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-xl text-foreground">Ofertas publicadas</h2>
+        <button
+          onClick={runCheck}
+          disabled={checking}
+          className="rounded-full border border-primary px-5 py-2 text-sm font-semibold text-primary disabled:opacity-60"
+        >
+          {checking ? "Verificando…" : "Verificar status dos links"}
+        </button>
+      </div>
+      {statuses && (
+        <p className="mt-3 text-sm text-muted-foreground">
+          {Object.values(statuses).filter((s) => s === "ok").length} no ar ·{" "}
+          {Object.values(statuses).filter((s) => s === "broken").length} fora do ar ·{" "}
+          {Object.values(statuses).filter((s) => s === "unknown").length} não confirmados (a loja bloqueou a checagem — abra para conferir)
+        </p>
+      )}
+      {checkErr && <p className="mt-3 text-sm text-destructive">{checkErr}</p>}
       <ul className="mt-4 divide-y divide-border rounded-2xl border border-border bg-card">
         {(offers.data ?? []).map((o) => (
           <li key={o.id} className={`flex items-center gap-4 p-4 ${editing === o.id ? "bg-muted" : ""}`}>
@@ -152,6 +188,22 @@ function AdminPage() {
               <p className="truncate text-sm font-semibold text-card-foreground">{o.title}</p>
               <p className="text-xs text-muted-foreground">{CATEGORIES.find((c) => c.slug === o.category)?.name}{o.subcategory ? ` › ${o.subcategory}` : ""} · {o.store_name}</p>
             </div>
+            {statuses?.[o.id] && (
+              <a
+                href={o.link}
+                target="_blank"
+                rel="noreferrer"
+                className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${
+                  statuses[o.id] === "ok"
+                    ? "bg-primary/10 text-primary"
+                    : statuses[o.id] === "broken"
+                      ? "bg-destructive/10 text-destructive"
+                      : "bg-secondary/20 text-foreground"
+                }`}
+              >
+                {statuses[o.id] === "ok" ? "No ar" : statuses[o.id] === "broken" ? "Fora do ar" : "Conferir"}
+              </a>
+            )}
             <button onClick={() => startEdit(o)} aria-label="Editar oferta" className="text-muted-foreground hover:text-primary">
               <Pencil size={18} />
             </button>
