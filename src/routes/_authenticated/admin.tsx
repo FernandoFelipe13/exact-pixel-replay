@@ -44,12 +44,29 @@ function AdminPage() {
   const [checking, setChecking] = useState(false);
   const [statuses, setStatuses] = useState<Record<string, LinkStatus> | null>(null);
   const [checkErr, setCheckErr] = useState<string | null>(null);
+  const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
 
   async function runCheck() {
     setChecking(true);
     setCheckErr(null);
+    setStatuses({});
     try {
-      setStatuses(await checkFn());
+      const { data, error } = await supabase.from("offers").select("id").limit(1000);
+      if (error) throw error;
+      const ids = (data ?? []).map((r) => r.id);
+      setProgress({ done: 0, total: ids.length });
+      let failed = 0;
+      for (let i = 0; i < ids.length; i += 10) {
+        const batch = ids.slice(i, i + 10);
+        try {
+          const res = await checkFn({ data: { ids: batch } });
+          setStatuses((prev) => ({ ...(prev ?? {}), ...res }));
+        } catch {
+          failed += batch.length;
+        }
+        setProgress({ done: Math.min(i + 10, ids.length), total: ids.length });
+      }
+      if (failed > 0) setCheckErr(`${failed} ofertas não puderam ser verificadas. Tente novamente.`);
     } catch {
       setCheckErr("Não foi possível verificar os links agora. Tente novamente.");
     } finally {
