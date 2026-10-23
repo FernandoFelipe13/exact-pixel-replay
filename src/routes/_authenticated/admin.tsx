@@ -44,12 +44,29 @@ function AdminPage() {
   const [checking, setChecking] = useState(false);
   const [statuses, setStatuses] = useState<Record<string, LinkStatus> | null>(null);
   const [checkErr, setCheckErr] = useState<string | null>(null);
+  const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
 
   async function runCheck() {
     setChecking(true);
     setCheckErr(null);
+    setStatuses({});
     try {
-      setStatuses(await checkFn());
+      const { data, error } = await supabase.from("offers").select("id").limit(1000);
+      if (error) throw error;
+      const ids = (data ?? []).map((r) => r.id);
+      setProgress({ done: 0, total: ids.length });
+      let failed = 0;
+      for (let i = 0; i < ids.length; i += 10) {
+        const batch = ids.slice(i, i + 10);
+        try {
+          const res = await checkFn({ data: { ids: batch } });
+          setStatuses((prev) => ({ ...(prev ?? {}), ...res }));
+        } catch {
+          failed += batch.length;
+        }
+        setProgress({ done: Math.min(i + 10, ids.length), total: ids.length });
+      }
+      if (failed > 0) setCheckErr(`${failed} ofertas não puderam ser verificadas. Tente novamente.`);
     } catch {
       setCheckErr("Não foi possível verificar os links agora. Tente novamente.");
     } finally {
@@ -178,6 +195,19 @@ function AdminPage() {
           {Object.values(statuses).filter((s) => s === "broken").length} fora do ar ·{" "}
           {Object.values(statuses).filter((s) => s === "unknown").length} não confirmados (a loja bloqueou a checagem — abra para conferir)
         </p>
+      )}
+      {progress && progress.total > 0 && (checking || progress.done < progress.total) && (
+        <div className="mt-3">
+          <p className="text-sm text-muted-foreground">
+            Verificando ofertas: {progress.done} de {progress.total} ({Math.round((progress.done / progress.total) * 100)}%)
+          </p>
+          <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-muted">
+            <div
+              className="h-full bg-primary transition-all"
+              style={{ width: `${(progress.done / progress.total) * 100}%` }}
+            />
+          </div>
+        </div>
       )}
       {checkErr && <p className="mt-3 text-sm text-destructive">{checkErr}</p>}
       <ul className="mt-4 divide-y divide-border rounded-2xl border border-border bg-card">

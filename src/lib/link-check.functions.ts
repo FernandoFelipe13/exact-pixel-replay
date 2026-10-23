@@ -28,20 +28,25 @@ async function checkOne(url: string): Promise<LinkStatus> {
 
 export const checkOfferLinks = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
+  .inputValidator((data: { ids: string[] }) => {
+    if (!Array.isArray(data?.ids)) throw new Error("ids inválidos");
+    return { ids: data.ids.slice(0, 10).map(String) };
+  })
+  .handler(async ({ context, data: input }) => {
     const { data: isAdmin } = await context.supabase.rpc("has_role", {
       _user_id: context.userId,
       _role: "admin",
     });
     if (!isAdmin) throw new Error("Forbidden");
-    const { data, error } = await context.supabase.from("offers").select("id, link").limit(1000);
+    if (input.ids.length === 0) return {} as Record<string, LinkStatus>;
+    const { data, error } = await context.supabase
+      .from("offers")
+      .select("id, link")
+      .in("id", input.ids);
     if (error) throw new Error("Não foi possível carregar as ofertas");
-    const results: Record<string, LinkStatus> = {};
     const list = data ?? [];
-    for (let i = 0; i < list.length; i += 6) {
-      const batch = list.slice(i, i + 6);
-      const out = await Promise.all(batch.map((o) => checkOne(o.link)));
-      batch.forEach((o, j) => (results[o.id] = out[j] ?? "unknown"));
-    }
+    const out = await Promise.all(list.map((o) => checkOne(o.link)));
+    const results: Record<string, LinkStatus> = {};
+    list.forEach((o, j) => (results[o.id] = out[j] ?? "unknown"));
     return results;
   });
