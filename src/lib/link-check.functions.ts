@@ -41,7 +41,7 @@ export const checkOfferLinks = createServerFn({ method: "POST" })
     for (let i = 0; i < list.length; i += 6) {
       const batch = list.slice(i, i + 6);
       const out = await Promise.all(batch.map((o) => checkOne(o.link)));
-      batch.forEach((o, j) => (results[o.id] = out[j]));
+      batch.forEach((o, j) => (results[o.id] = out[j] ?? "unknown"));
     }
     return results;
   });
